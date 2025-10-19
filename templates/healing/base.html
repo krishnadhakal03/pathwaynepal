@@ -56,7 +56,6 @@
     <!-- Analytics -->
     {% if analytics and analytics.is_active %}
         {% if analytics.gtag_id %}
-            <!-- Google Analytics 4 -->
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics.gtag_id }}"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
@@ -65,7 +64,6 @@
                 gtag('config', '{{ analytics.gtag_id }}');
             </script>
         {% endif %}
-        
         {% if analytics.custom_tracking_code %}
             {{ analytics.custom_tracking_code|safe }}
         {% endif %}
@@ -93,8 +91,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'healing:home' %}">Home</a>
                         </li>
+
+                        <!-- About Us Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 About Us
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
@@ -103,8 +103,10 @@
                                 <li><a class="dropdown-item" href="{% url 'healing:testimonials' %}">Testimonials</a></li>
                             </ul>
                         </li>
+
+                        <!-- Workshops Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="workshopsDropdown" role="button">
+                            <a class="nav-link dropdown-toggle" href="#" id="workshopsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Workshops
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="workshopsDropdown">
@@ -113,6 +115,7 @@
                                 <li><a class="dropdown-item" href="{% url 'healing:events' %}">Events</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'healing:book_healing_session' %}">Book A Session</a>
                         </li>
@@ -143,7 +146,6 @@
                 {% endfor %}
             </div>
         {% endif %}
-        
         {% block content %}{% endblock %}
     </main>
 
@@ -156,18 +158,10 @@
                     <p class="text-muted">The Center for Pranic Healing is a non-profit organization whose mission is to help people live a happy, healthy and well-balanced life.</p>
                     {% if site_settings %}
                         <div class="social-links">
-                            {% if site_settings.facebook_url %}
-                                <a href="{{ site_settings.facebook_url }}" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>
-                            {% endif %}
-                            {% if site_settings.instagram_url %}
-                                <a href="{{ site_settings.instagram_url }}" class="text-light me-3"><i class="fab fa-instagram"></i></a>
-                            {% endif %}
-                            {% if site_settings.twitter_url %}
-                                <a href="{{ site_settings.twitter_url }}" class="text-light me-3"><i class="fab fa-twitter"></i></a>
-                            {% endif %}
-                            {% if site_settings.linkedin_url %}
-                                <a href="{{ site_settings.linkedin_url }}" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>
-                            {% endif %}
+                            {% if site_settings.facebook_url %}<a href="{{ site_settings.facebook_url }}" class="text-light me-3"><i class="fab fa-facebook-f"></i></a>{% endif %}
+                            {% if site_settings.instagram_url %}<a href="{{ site_settings.instagram_url }}" class="text-light me-3"><i class="fab fa-instagram"></i></a>{% endif %}
+                            {% if site_settings.twitter_url %}<a href="{{ site_settings.twitter_url }}" class="text-light me-3"><i class="fab fa-twitter"></i></a>{% endif %}
+                            {% if site_settings.linkedin_url %}<a href="{{ site_settings.linkedin_url }}" class="text-light me-3"><i class="fab fa-linkedin-in"></i></a>{% endif %}
                         </div>
                     {% endif %}
                 </div>
@@ -186,18 +180,9 @@
                 <div class="col-lg-4 mb-4">
                     <h5>Contact Info</h5>
                     {% if contact_info %}
-                        <p class="text-muted mb-1">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            {{ contact_info.address|linebreaks }}
-                        </p>
-                        <p class="text-muted mb-1">
-                            <i class="fas fa-phone me-2"></i>
-                            {{ contact_info.phone }}
-                        </p>
-                        <p class="text-muted mb-1">
-                            <i class="fas fa-envelope me-2"></i>
-                            {{ contact_info.email }}
-                        </p>
+                        <p class="text-muted mb-1"><i class="fas fa-map-marker-alt me-2"></i>{{ contact_info.address|linebreaks }}</p>
+                        <p class="text-muted mb-1"><i class="fas fa-phone me-2"></i>{{ contact_info.phone }}</p>
+                        <p class="text-muted mb-1"><i class="fas fa-envelope me-2"></i>{{ contact_info.email }}</p>
                     {% endif %}
                 </div>
             </div>
@@ -218,45 +203,6 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/pranic-healing.js' %}"></script>
-
-    <!-- Mobile dropdown fix -->
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const dropdowns = document.querySelectorAll('.navbar .dropdown');
-
-        dropdowns.forEach(dropdown => {
-            const toggle = dropdown.querySelector('.dropdown-toggle');
-
-            toggle.addEventListener('click', function(e) {
-                if(window.innerWidth < 992){  // mobile breakpoint
-                    e.preventDefault();  // prevent link default
-                    const menu = dropdown.querySelector('.dropdown-menu');
-                    
-                    // close other open dropdowns
-                    dropdowns.forEach(d => {
-                        if(d !== dropdown){
-                            d.classList.remove('show');
-                            d.querySelector('.dropdown-menu').classList.remove('show');
-                        }
-                    });
-
-                    dropdown.classList.toggle('show');
-                    menu.classList.toggle('show');
-                }
-            });
-        });
-
-        // Close dropdowns when clicking outside
-        document.addEventListener('click', function(e){
-            dropdowns.forEach(dropdown => {
-                if(!dropdown.contains(e.target)){
-                    dropdown.classList.remove('show');
-                    dropdown.querySelector('.dropdown-menu').classList.remove('show');
-                }
-            });
-        });
-    });
-    </script>
     
     {% block extra_js %}{% endblock %}
     
