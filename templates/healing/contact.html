@@ -1,0 +1,303 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}Contact Us - Pranic Pathway Nepal{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Contact Us</h1>
+                <p class="lead text-muted">
+                    Get in touch with us for healing sessions, workshop information, or any questions you may have.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Information -->
+{% if contact_info %}
+<section class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-map-marker-alt fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Address</h5>
+                        <p class="card-text text-muted">{{ contact_info.address|linebreaks }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-phone fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Phone</h5>
+                        <p class="card-text text-muted">
+                            <a href="tel:{{ contact_info.phone }}" class="text-decoration-none">{{ contact_info.phone }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm text-center">
+                    <div class="card-body p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-envelope fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Email</h5>
+                        <p class="card-text text-muted">
+                            <a href="mailto:{{ contact_info.email }}" class="text-decoration-none">{{ contact_info.email }}</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Contact Form -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="h3 mb-4 text-center">Send us a Message</h2>
+                        <form id="contactForm" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your name.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email address.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="subject" class="form-label">Subject *</label>
+                                    <select class="form-select" id="subject" name="subject" required>
+                                        <option value="">Choose a subject</option>
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Healing Session">Healing Session</option>
+                                        <option value="Workshop Information">Workshop Information</option>
+                                        <option value="Event Information">Event Information</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a subject.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                                    <div class="invalid-feedback">
+                                        Please provide your message.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to our newsletter for updates on workshops and events
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Hours -->
+{% if site_settings %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Business Hours</h2>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title">Monday - Friday</h5>
+                                <p class="card-text text-muted">{{ site_settings.monday_hours }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm">
+                            <div class="card-body p-4">
+                                <h5 class="card-title">Saturday - Sunday</h5>
+                                <p class="card-text text-muted">{{ site_settings.saturday_hours }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Map Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Find Us</h2>
+                <p class="lead text-muted mb-4">
+                    Visit our center for healing sessions, workshops, and meditation classes.
+                </p>
+                {% if contact_info %}
+                    <div class="map-container" style="height: 400px; background-color: #f8f9fa; border-radius: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div class="text-center">
+                            <i class="fas fa-map-marker-alt fa-3x text-primary mb-3"></i>
+                            <h5>{{ contact_info.address|linebreaks }}</h5>
+                            <p class="text-muted">Click to open in Google Maps</p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Social Media -->
+{% if site_settings %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Follow Us</h2>
+                <p class="lead text-muted mb-4">
+                    Stay connected with our community and get updates on workshops and events.
+                </p>
+                <div class="social-links">
+                    {% if site_settings.facebook_url %}
+                        <a href="{{ site_settings.facebook_url }}" class="btn btn-outline-primary btn-lg me-3 mb-3" target="_blank">
+                            <i class="fab fa-facebook-f me-2"></i>Facebook
+                        </a>
+                    {% endif %}
+                    {% if site_settings.instagram_url %}
+                        <a href="{{ site_settings.instagram_url }}" class="btn btn-outline-primary btn-lg me-3 mb-3" target="_blank">
+                            <i class="fab fa-instagram me-2"></i>Instagram
+                        </a>
+                    {% endif %}
+                    {% if site_settings.twitter_url %}
+                        <a href="{{ site_settings.twitter_url }}" class="btn btn-outline-primary btn-lg me-3 mb-3" target="_blank">
+                            <i class="fab fa-twitter me-2"></i>Twitter
+                        </a>
+                    {% endif %}
+                    {% if site_settings.linkedin_url %}
+                        <a href="{{ site_settings.linkedin_url }}" class="btn btn-outline-primary btn-lg me-3 mb-3" target="_blank">
+                            <i class="fab fa-linkedin-in me-2"></i>LinkedIn
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Begin Your Healing Journey?</h2>
+                <p class="lead mb-4">
+                    Book a healing session or register for one of our workshops today.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:book_healing_session' %}" class="btn btn-light btn-lg">Book a Session</a>
+                    <a href="{% url 'healing:workshops' %}" class="btn btn-outline-light btn-lg">View Workshops</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Contact form submission
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        subject: formData.get('subject'),
+        message: formData.get('message')
+    };
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading"></span> Sending...';
+    submitBtn.disabled = true;
+    
+    // Send AJAX request
+    fetch('/contact/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification(data.message, 'success');
+            this.reset();
+        } else {
+            showNotification(data.error || 'An error occurred. Please try again.', 'error');
+        }
+    })
+    .catch(error => {
+        showNotification('An error occurred. Please try again.', 'error');
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
+</script>
+{% endblock %}
+

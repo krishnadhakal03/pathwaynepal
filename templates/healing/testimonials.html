@@ -1,0 +1,126 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}Testimonials - Pranic Pathway Nepal{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">What Our Community Says</h1>
+                <p class="lead text-muted">
+                    Hear from people who have experienced the transformative power of Pranic Healing.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="py-5">
+    <div class="container">
+        {% if testimonials %}
+            <div class="row g-4">
+                {% for testimonial in testimonials %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body text-center p-4">
+                            {% if testimonial.image %}
+                                <img src="{{ testimonial.image.url }}" class="rounded-circle mb-3" alt="{{ testimonial.client_name }}" width="80" height="80" style="object-fit: cover;">
+                            {% else %}
+                                <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                    <i class="fas fa-user fa-2x"></i>
+                                </div>
+                            {% endif %}
+                            <div class="rating mb-3">
+                                {% for i in "12345" %}
+                                    {% if forloop.counter <= testimonial.rating %}
+                                        <i class="fas fa-star text-warning"></i>
+                                    {% else %}
+                                        <i class="far fa-star text-warning"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <p class="card-text text-muted mb-3">"{{ testimonial.content|truncatewords:30 }}"</p>
+                            <h6 class="card-title mb-1">{{ testimonial.client_name }}</h6>
+                            {% if testimonial.profession %}
+                                <small class="text-muted">{{ testimonial.profession }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if page_obj.has_other_pages %}
+            <nav aria-label="Testimonials pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                        </li>
+                    {% endif %}
+                    
+                    <li class="page-item active">
+                        <span class="page-link">
+                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+                    
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <i class="fas fa-quote-left fa-4x text-muted mb-4"></i>
+                            <h3 class="card-title">Share Your Experience</h3>
+                            <p class="card-text text-muted">
+                                We would love to hear about your healing journey. Share your experience with Pranic Healing and help others discover its benefits.
+                            </p>
+                            <a href="{% url 'healing:contact' %}" class="btn btn-primary">Share Your Story</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Experience Healing?</h2>
+                <p class="lead mb-4">
+                    Join our community and discover the transformative power of Pranic Healing for yourself.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:book_healing_session' %}" class="btn btn-light btn-lg">Book a Session</a>
+                    <a href="{% url 'healing:workshops' %}" class="btn btn-outline-light btn-lg">Join Workshop</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

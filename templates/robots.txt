@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: http://{{ domain }}/sitemap.xml
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /static/admin/
+
+# Allow important pages
+Allow: /
+Allow: /about/
+Allow: /workshops/
+Allow: /healers/
+Allow: /gallery/
+Allow: /testimonials/
+Allow: /blog/
+Allow: /contact/
+Allow: /events/
+Allow: /meditation/
+

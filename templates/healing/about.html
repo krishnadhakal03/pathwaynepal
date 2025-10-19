@@ -1,0 +1,275 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}About Us - Pranic Healing USA{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">About Pranic Pathway Nepal</h1>
+                <p class="lead text-muted">
+                    Learn about our mission to help people live happy, healthy and well-balanced lives through Pranic Healing.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="h1 mb-4">Our Mission</h2>
+                <p class="lead text-muted mb-4">
+                    The Center for Pranic Healing is a non-profit tax-exempt organization whose mission is to help people live a happy, healthy and well-balanced life.
+                </p>
+                <p class="text-muted mb-4">
+                    Our mission is to help you create remarkable transformations in all areas of your life. Through knowledge of Pranic Healing and Arhatic Yoga you will learn how to enhance all aspects of your life including physical, emotional, financial and spiritual.
+                </p>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-heart fa-2x text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">Healing</h5>
+                                <p class="text-muted mb-0">Physical and emotional wellness</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-lotus fa-2x text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">Spiritual Growth</h5>
+                                <p class="text-muted mb-0">Inner transformation and peace</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-users fa-2x text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">Community</h5>
+                                <p class="text-muted mb-0">Supportive healing community</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-graduation-cap fa-2x text-primary"></i>
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <h5 class="mb-1">Education</h5>
+                                <p class="text-muted mb-0">Learn ancient healing techniques</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="{% static 'img/about-pranic-healing.jpg' %}" alt="About Pranic Healing" class="img-fluid rounded shadow">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What is Pranic Healing Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">What is Pranic Healing?</h2>
+                <p class="lead text-muted">
+                    Pranic Healing is a highly developed and tested system of energy medicine that uses prana to balance, harmonize and transform the body's energy processes.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-hands-healing fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Energy Healing</h4>
+                        <p class="card-text text-muted">
+                            Pranic Healing works with the energy body to accelerate the healing process of the physical body.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-leaf fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Natural & Safe</h4>
+                        <p class="card-text text-muted">
+                            A natural, non-touch, non-invasive healing modality that complements conventional medicine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-clock fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Fast Results</h4>
+                        <p class="card-text text-muted">
+                            Many people experience relief from pain and other symptoms in just a few sessions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Healers Section -->
+{% if healers %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">Our Certified Healers</h2>
+                <p class="lead text-muted">
+                    Meet our team of experienced and certified Pranic Healers who are dedicated to your healing journey.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for healer in healers %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    {% if healer.image %}
+                        <img src="{{ healer.image.url }}" class="card-img-top" alt="{{ healer.name }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                            <i class="fas fa-user fa-4x text-muted"></i>
+                        </div>
+                    {% endif %}
+                    <div class="card-body text-center p-4">
+                        <h5 class="card-title">{{ healer.name }}</h5>
+                        <p class="text-primary mb-2">{{ healer.position }}</p>
+                        {% if healer.specialization %}
+                            <p class="text-muted small mb-3">{{ healer.specialization }}</p>
+                        {% endif %}
+                        {% if healer.bio %}
+                            <p class="card-text text-muted">{{ healer.bio|truncatewords:20 }}</p>
+                        {% endif %}
+                        <div class="social-links">
+                            {% if healer.facebook_url %}
+                                <a href="{{ healer.facebook_url }}" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                            {% endif %}
+                            {% if healer.instagram_url %}
+                                <a href="{{ healer.instagram_url }}" class="text-primary me-2"><i class="fab fa-instagram"></i></a>
+                            {% endif %}
+                            {% if healer.linkedin_url %}
+                                <a href="{{ healer.linkedin_url }}" class="text-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'healing:healers' %}" class="btn btn-primary btn-lg">Meet All Our Healers</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Testimonials Section -->
+{% if testimonials %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">What Our Community Says</h2>
+                <p class="lead text-muted">
+                    Hear from people who have experienced the transformative power of Pranic Healing.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for testimonial in testimonials %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        {% if testimonial.image %}
+                            <img src="{{ testimonial.image.url }}" class="rounded-circle mb-3" alt="{{ testimonial.client_name }}" width="80" height="80" style="object-fit: cover;">
+                        {% else %}
+                            <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                                <i class="fas fa-user fa-2x"></i>
+                            </div>
+                        {% endif %}
+                        <div class="rating mb-3">
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= testimonial.rating %}
+                                    <i class="fas fa-star text-warning"></i>
+                                {% else %}
+                                    <i class="far fa-star text-warning"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <p class="card-text text-muted mb-3">"{{ testimonial.content|truncatewords:30 }}"</p>
+                        <h6 class="card-title mb-1">{{ testimonial.client_name }}</h6>
+                        {% if testimonial.profession %}
+                            <small class="text-muted">{{ testimonial.profession }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center mt-5">
+            <a href="{% url 'healing:testimonials' %}" class="btn btn-outline-primary btn-lg">Read More Testimonials</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Begin Your Healing Journey?</h2>
+                <p class="lead mb-4">
+                    Join our community and discover the transformative power of Pranic Healing. Book a session or attend one of our workshops today.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:book_healing_session' %}" class="btn btn-light btn-lg">Book a Session</a>
+                    <a href="{% url 'healing:workshops' %}" class="btn btn-outline-light btn-lg">View Workshops</a>
+                    <a href="{% url 'healing:contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

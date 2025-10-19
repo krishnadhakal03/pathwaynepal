@@ -1,0 +1,126 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ event.title }} - Pranic Pathway Nepal
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">{{ event.title }}</h1>
+                <div class="d-flex justify-content-center align-items-center gap-4 text-muted">
+                    <span><i class="fas fa-calendar me-1"></i>{{ event.event_date|date:"F d, Y" }}</span>
+                    <span><i class="fas fa-clock me-1"></i>{{ event.start_time|time:"g:i A" }} - {{ event.end_time|time:"g:i A" }}</span>
+                    <span><i class="fas fa-map-marker-alt me-1"></i>{{ event.location }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Event Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        {% if event.image %}
+                            <img src="{{ event.image.url }}" class="img-fluid rounded mb-4" alt="{{ event.title }}">
+                        {% endif %}
+                        
+                        <div class="event-content">
+                            <h4>Event Description</h4>
+                            <div class="content">
+                                {{ event.description|safe }}
+                            </div>
+                        </div>
+                        
+                        {% if event.agenda %}
+                        <div class="mt-4">
+                            <h4>Event Agenda</h4>
+                            <div class="content">
+                                {{ event.agenda|safe }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if event.requirements %}
+                        <div class="mt-4">
+                            <h4>What to Bring</h4>
+                            <div class="content">
+                                {{ event.requirements|safe }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mt-4">
+                            <a href="{% url 'healing:contact' %}" class="btn btn-primary btn-lg">Register for Event</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Events -->
+{% if related_events %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mb-4">Related Events</h3>
+                <div class="row g-4">
+                    {% for related_event in related_events %}
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm">
+                            {% if related_event.image %}
+                                <img src="{{ related_event.image.url }}" class="card-img-top" alt="{{ related_event.title }}" style="height: 150px; object-fit: cover;">
+                            {% else %}
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 150px;">
+                                    <i class="fas fa-calendar-alt fa-2x text-muted"></i>
+                                </div>
+                            {% endif %}
+                            <div class="card-body p-3">
+                                <div class="d-flex align-items-center mb-2">
+                                    <span class="badge bg-primary me-2">{{ related_event.event_date|date:"M d" }}</span>
+                                    <small class="text-muted">{{ related_event.start_time|time:"g:i A" }}</small>
+                                </div>
+                                <h6 class="card-title">{{ related_event.title }}</h6>
+                                <p class="card-text text-muted small">{{ related_event.description|truncatewords:15 }}</p>
+                                <a href="{% url 'healing:event_detail' related_event.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Join Our Community</h2>
+                <p class="lead mb-4">
+                    Be part of our healing community and discover the transformative power of Pranic Healing.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:events' %}" class="btn btn-light btn-lg">View All Events</a>
+                    <a href="{% url 'healing:contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

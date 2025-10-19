@@ -1,0 +1,23 @@
+/* Dynamic Theme CSS - This file is served dynamically by Django */
+
+/* This file can be used to override theme settings dynamically */
+/* For now, it's empty but can be populated with dynamic CSS based on theme settings */
+
+/* Example of how this could be used:
+:root {
+    --primary-color: #2E8B57;
+    --secondary-color: #32CD32;
+    --accent-color: #90EE90;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+*/
+

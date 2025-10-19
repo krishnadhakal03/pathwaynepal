@@ -1,0 +1,97 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}Our Healers - Pranic Pathway Nepal{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Our Certified Healers</h1>
+                <p class="lead text-muted">
+                    Meet our team of experienced and certified Pranic Healers who are dedicated to your healing journey.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Healers Section -->
+<section class="py-5">
+    <div class="container">
+        {% if healers %}
+            <div class="row g-4">
+                {% for healer in healers %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="card h-100 border-0 shadow-sm">
+                        {% if healer.image %}
+                            <img src="{{ healer.image.url }}" class="card-img-top" alt="{{ healer.name }}" style="height: 300px; object-fit: cover;">
+                        {% else %}
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 300px;">
+                                <i class="fas fa-user fa-4x text-muted"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body text-center p-4">
+                            <h5 class="card-title">{{ healer.name }}</h5>
+                            <p class="text-primary mb-2">{{ healer.position }}</p>
+                            {% if healer.specialization %}
+                                <p class="text-muted small mb-3">{{ healer.specialization }}</p>
+                            {% endif %}
+                            {% if healer.bio %}
+                                <p class="card-text text-muted">{{ healer.bio|truncatewords:25 }}</p>
+                            {% endif %}
+                            <div class="social-links">
+                                {% if healer.facebook_url %}
+                                    <a href="{{ healer.facebook_url }}" class="text-primary me-2"><i class="fab fa-facebook-f"></i></a>
+                                {% endif %}
+                                {% if healer.instagram_url %}
+                                    <a href="{{ healer.instagram_url }}" class="text-primary me-2"><i class="fab fa-instagram"></i></a>
+                                {% endif %}
+                                {% if healer.linkedin_url %}
+                                    <a href="{{ healer.linkedin_url }}" class="text-primary me-2"><i class="fab fa-linkedin-in"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body p-5">
+                            <i class="fas fa-users fa-4x text-muted mb-4"></i>
+                            <h3 class="card-title">Our Healers</h3>
+                            <p class="card-text text-muted">
+                                We are currently updating our healer profiles. Please check back soon to meet our certified Pranic Healers.
+                            </p>
+                            <a href="{% url 'healing:contact' %}" class="btn btn-primary">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Book a Healing Session?</h2>
+                <p class="lead mb-4">
+                    Our certified healers are ready to help you on your healing journey. Book a session today.
+                </p>
+                <a href="{% url 'healing:book_healing_session' %}" class="btn btn-light btn-lg">Book a Session</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

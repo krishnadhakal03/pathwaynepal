@@ -1,0 +1,415 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}Book a Healing Session - Pranic Pathway Nepal{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Book a Healing Session</h1>
+                <p class="lead text-muted">
+                    Schedule your personalized Pranic Healing session with our certified healers.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Healing Session Types -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">Types of Healing Sessions</h2>
+                <p class="lead text-muted">
+                    Choose the type of healing session that best suits your needs.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-heart fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Physical Healing</h4>
+                        <p class="card-text text-muted">
+                            Address physical ailments, pain, and health issues through energy healing.
+                        </p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-primary me-2"></i>Pain relief</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Injury recovery</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Chronic conditions</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Immune system support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-brain fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Emotional Healing</h4>
+                        <p class="card-text text-muted">
+                            Work through emotional blocks, trauma, and mental health challenges.
+                        </p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-primary me-2"></i>Stress relief</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Anxiety management</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Depression support</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Trauma healing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-lotus fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">Spiritual Healing</h4>
+                        <p class="card-text text-muted">
+                            Connect with your spiritual self and find inner peace and purpose.
+                        </p>
+                        <ul class="list-unstyled text-start">
+                            <li><i class="fas fa-check text-primary me-2"></i>Spiritual awakening</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Chakra balancing</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Energy cleansing</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Meditation guidance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Booking Form -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="h3 mb-4 text-center">Schedule Your Session</h2>
+                        <form id="healingSessionForm" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="first_name" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your first name.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="last_name" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your last name.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid email address.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone *</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                                    <div class="invalid-feedback">
+                                        Please provide your phone number.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="healing_type" class="form-label">Type of Healing *</label>
+                                    <select class="form-select" id="healing_type" name="healing_type" required>
+                                        <option value="">Select healing type</option>
+                                        <option value="Physical Healing">Physical Healing</option>
+                                        <option value="Emotional Healing">Emotional Healing</option>
+                                        <option value="Spiritual Healing">Spiritual Healing</option>
+                                        <option value="General Healing">General Healing</option>
+                                        <option value="Chakra Balancing">Chakra Balancing</option>
+                                        <option value="Energy Cleansing">Energy Cleansing</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a healing type.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="date" class="form-label">Preferred Date *</label>
+                                    <input type="date" class="form-control" id="date" name="date" required>
+                                    <div class="invalid-feedback">
+                                        Please select a date.
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="time" class="form-label">Preferred Time *</label>
+                                    <select class="form-select" id="time" name="time" required>
+                                        <option value="">Select time</option>
+                                        <option value="09:00">9:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">1:00 PM</option>
+                                        <option value="14:00">2:00 PM</option>
+                                        <option value="15:00">3:00 PM</option>
+                                        <option value="16:00">4:00 PM</option>
+                                        <option value="17:00">5:00 PM</option>
+                                        <option value="18:00">6:00 PM</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a time.
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Additional Information</label>
+                                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Please describe any specific issues or concerns you'd like to address during the session..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="consent" name="consent" required>
+                                        <label class="form-check-label" for="consent">
+                                            I understand that Pranic Healing is a complementary therapy and not a substitute for medical treatment. I consent to receiving energy healing sessions. *
+                                        </label>
+                                        <div class="invalid-feedback">
+                                            You must agree to the terms to book a session.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter">
+                                        <label class="form-check-label" for="newsletter">
+                                            Subscribe to our newsletter for updates on workshops and events
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg px-5">Book Session</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What to Expect -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">What to Expect</h2>
+                <p class="lead text-muted">
+                    Here's what you can expect during your Pranic Healing session.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-comments fa-3x text-primary"></i>
+                    </div>
+                    <h5>Consultation</h5>
+                    <p class="text-muted">Brief discussion about your concerns and goals for the session.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-couch fa-3x text-primary"></i>
+                    </div>
+                    <h5>Relaxation</h5>
+                    <p class="text-muted">You'll be comfortably seated or lying down in a peaceful environment.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-hands-healing fa-3x text-primary"></i>
+                    </div>
+                    <h5>Energy Work</h5>
+                    <p class="text-muted">The healer will work with your energy field to promote healing.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-lightbulb fa-3x text-primary"></i>
+                    </div>
+                    <h5>Guidance</h5>
+                    <p class="text-muted">Receive guidance on self-healing techniques and follow-up care.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">Session Pricing</h2>
+                <p class="lead text-muted">
+                    Affordable healing sessions to support your wellness journey.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <h4 class="card-title">Single Session</h4>
+                        <div class="mb-3">
+                            <span class="h2 text-primary">$80</span>
+                            <span class="text-muted">/session</span>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-primary me-2"></i>60-minute session</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Personalized healing</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Self-healing guidance</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Follow-up support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm border-primary">
+                    <div class="card-body text-center p-4">
+                        <div class="badge bg-primary mb-3">Most Popular</div>
+                        <h4 class="card-title">3-Session Package</h4>
+                        <div class="mb-3">
+                            <span class="h2 text-primary">$210</span>
+                            <span class="text-muted">/package</span>
+                            <div class="text-success small">Save $30</div>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-primary me-2"></i>3 x 60-minute sessions</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Comprehensive healing plan</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Progress tracking</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Priority scheduling</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <h4 class="card-title">5-Session Package</h4>
+                        <div class="mb-3">
+                            <span class="h2 text-primary">$320</span>
+                            <span class="text-muted">/package</span>
+                            <div class="text-success small">Save $80</div>
+                        </div>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check text-primary me-2"></i>5 x 60-minute sessions</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Deep transformation work</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Personalized meditation</li>
+                            <li><i class="fas fa-check text-primary me-2"></i>Lifetime support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Begin Your Healing Journey?</h2>
+                <p class="lead mb-4">
+                    Book your session today and take the first step towards wellness and transformation.
+                </p>
+                <a href="#healingSessionForm" class="btn btn-light btn-lg">Book Now</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Set minimum date to today
+document.getElementById('date').min = new Date().toISOString().split('T')[0];
+
+// Healing session form submission
+document.getElementById('healingSessionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = {
+        first_name: formData.get('first_name'),
+        last_name: formData.get('last_name'),
+        email: formData.get('email'),
+        phone: formData.get('phone'),
+        date: formData.get('date'),
+        time: formData.get('time'),
+        healing_type: formData.get('healing_type'),
+        message: formData.get('message')
+    };
+    
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.textContent;
+    submitBtn.innerHTML = '<span class="loading"></span> Booking...';
+    submitBtn.disabled = true;
+    
+    // Send AJAX request
+    fetch('/book-healing-session/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification(data.message, 'success');
+            this.reset();
+        } else {
+            showNotification(data.error || 'An error occurred. Please try again.', 'error');
+        }
+    })
+    .catch(error => {
+        showNotification('An error occurred. Please try again.', 'error');
+        console.error('Error:', error);
+    })
+    .finally(() => {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+    });
+});
+</script>
+{% endblock %}
+

@@ -1,0 +1,13 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="15" fill="#2E8B57"/>
+  
+  <!-- Inner energy circles -->
+  <circle cx="16" cy="16" r="10" fill="none" stroke="#90EE90" stroke-width="1"/>
+  <circle cx="16" cy="16" r="6" fill="none" stroke="#FFFFFF" stroke-width="1"/>
+  
+  <!-- Central symbol -->
+  <circle cx="16" cy="16" r="3" fill="#FFFFFF"/>
+  <path d="M16 10 L20 16 L16 22 L12 16 Z" fill="#90EE90"/>
+</svg>
+

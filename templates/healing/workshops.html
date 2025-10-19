@@ -1,0 +1,234 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if seo_settings %}{{ seo_settings.page_title }}{% else %}Workshops - Pranic Pathway Nepal{% endif %}
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">Pranic Healing Workshops</h1>
+                <p class="lead text-muted">
+                    Discover the ancient art of energy healing through our comprehensive workshop series.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workshop Categories -->
+{% if workshop_categories %}
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="h1 mb-4">Workshop Categories</h2>
+                <p class="lead text-muted">
+                    Choose from our various workshop categories designed to meet your healing and spiritual needs.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            {% for category in workshop_categories %}
+            <div class="col-lg-4 col-md-6">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-hands-healing fa-3x text-primary"></i>
+                        </div>
+                        <h4 class="card-title">{{ category.name }}</h4>
+                        <p class="card-text text-muted">{{ category.description|truncatewords:20 }}</p>
+                        <a href="#category-{{ category.id }}" class="btn btn-outline-primary">View Workshops</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Individual Workshops -->
+{% if workshop_categories %}
+<section class="py-5 bg-light">
+    <div class="container">
+        {% for category in workshop_categories %}
+        {% if category.workshops.all %}
+        <div class="row mb-5" id="category-{{ category.id }}">
+            <div class="col-lg-12">
+                <h2 class="h1 mb-4 text-center">{{ category.name }} Workshops</h2>
+                
+                <div class="row g-4">
+                    {% for workshop in category.workshops.all %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 border-0 shadow-sm">
+                            {% if workshop.image %}
+                                <img src="{{ workshop.image.url }}" class="card-img-top" alt="{{ workshop.title }}" style="height: 200px; object-fit: cover;">
+                            {% else %}
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="fas fa-hands-healing fa-3x text-muted"></i>
+                                </div>
+                            {% endif %}
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">{{ workshop.title }}</h5>
+                                <p class="card-text text-muted flex-grow-1">{{ workshop.short_description|truncatewords:25 }}</p>
+                                
+                                <div class="workshop-details mb-3">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="text-muted">Duration:</span>
+                                        <span class="fw-bold">{{ workshop.duration|default:"16 hours" }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="text-muted">Price:</span>
+                                        <span class="fw-bold text-primary">${{ workshop.price }}</span>
+                                    </div>
+                                    {% if workshop.is_featured %}
+                                        <div class="text-center">
+                                            <span class="badge bg-warning text-dark">Featured</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="d-grid gap-2">
+                                    <a href="{% url 'healing:workshop_detail' workshop.id %}" class="btn btn-primary">Learn More</a>
+                                    <a href="{% url 'healing:book_healing_session' %}" class="btn btn-outline-primary">Register Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+<!-- Workshop Benefits -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">Why Choose Our Workshops?</h2>
+                <p class="lead text-muted">
+                    Our workshops are designed to provide you with practical skills and knowledge for your healing journey.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-certificate fa-3x text-primary"></i>
+                    </div>
+                    <h5>Certified Instructors</h5>
+                    <p class="text-muted">Learn from certified Pranic Healing instructors with years of experience.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-hands fa-3x text-primary"></i>
+                    </div>
+                    <h5>Hands-on Practice</h5>
+                    <p class="text-muted">Gain practical experience through hands-on healing sessions and exercises.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-book fa-3x text-primary"></i>
+                    </div>
+                    <h5>Comprehensive Materials</h5>
+                    <p class="text-muted">Receive detailed manuals and materials to support your learning journey.</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-users fa-3x text-primary"></i>
+                    </div>
+                    <h5>Community Support</h5>
+                    <p class="text-muted">Join a supportive community of healers and practitioners.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workshop Schedule -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+                <h2 class="h1 mb-4">Upcoming Workshop Schedule</h2>
+                <p class="lead text-muted">
+                    Check our calendar for upcoming workshops and events in your area.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5 class="card-title mb-2">Basic Pranic Healing Workshop</h5>
+                                <p class="text-muted mb-2">Learn the fundamentals of Pranic Healing in this comprehensive 2-day workshop.</p>
+                                <div class="d-flex align-items-center text-muted">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    <span class="me-3">March 15-16, 2025</span>
+                                    <i class="fas fa-clock me-2"></i>
+                                    <span class="me-3">9:00 AM - 6:00 PM</span>
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    <span>New York, NY</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                                <div class="mb-2">
+                                    <span class="h4 text-primary">$299</span>
+                                </div>
+                                <a href="{% url 'healing:book_healing_session' %}" class="btn btn-primary">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="{% url 'healing:events' %}" class="btn btn-outline-primary btn-lg">View All Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Start Your Healing Journey?</h2>
+                <p class="lead mb-4">
+                    Join thousands of people who have transformed their lives through Pranic Healing. Register for a workshop today.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:book_healing_session' %}" class="btn btn-light btn-lg">Register Now</a>
+                    <a href="{% url 'healing:contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

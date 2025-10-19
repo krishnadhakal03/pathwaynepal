@@ -1,0 +1,160 @@
+{% extends 'healing/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ workshop.title }} - Pranic Pathway Nepal
+{% endblock %}
+
+{% block content %}
+<!-- Page Header -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-4 fw-bold mb-4">{{ workshop.title }}</h1>
+                <p class="lead text-muted">{{ workshop.short_description }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Workshop Details -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        {% if workshop.image %}
+                            <img src="{{ workshop.image.url }}" class="img-fluid rounded mb-4" alt="{{ workshop.title }}">
+                        {% endif %}
+                        
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-clock fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Duration</h6>
+                                        <p class="text-muted mb-0">{{ workshop.duration }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-dollar-sign fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Price</h6>
+                                        <p class="text-muted mb-0">${{ workshop.price }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Max Participants</h6>
+                                        <p class="text-muted mb-0">{{ workshop.max_participants }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-map-marker-alt fa-2x text-primary me-3"></i>
+                                    <div>
+                                        <h6 class="mb-1">Location</h6>
+                                        <p class="text-muted mb-0">{{ workshop.location }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="workshop-content">
+                            <h4>About This Workshop</h4>
+                            <div class="content">
+                                {{ workshop.description|safe }}
+                            </div>
+                        </div>
+                        
+                        {% if workshop.what_you_will_learn %}
+                        <div class="mt-4">
+                            <h4>What You Will Learn</h4>
+                            <div class="content">
+                                {{ workshop.what_you_will_learn|safe }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if workshop.prerequisites %}
+                        <div class="mt-4">
+                            <h4>Prerequisites</h4>
+                            <div class="content">
+                                {{ workshop.prerequisites|safe }}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        <div class="mt-4">
+                            <a href="{% url 'healing:contact' %}" class="btn btn-primary btn-lg">Register Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Related Workshops -->
+{% if related_workshops %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h3 class="mb-4">Related Workshops</h3>
+                <div class="row g-4">
+                    {% for related_workshop in related_workshops %}
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm">
+                            {% if related_workshop.image %}
+                                <img src="{{ related_workshop.image.url }}" class="card-img-top" alt="{{ related_workshop.title }}" style="height: 200px; object-fit: cover;">
+                            {% else %}
+                                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <i class="fas fa-graduation-cap fa-3x text-muted"></i>
+                                </div>
+                            {% endif %}
+                            <div class="card-body p-4">
+                                <h5 class="card-title">{{ related_workshop.title }}</h5>
+                                <p class="card-text text-muted">{{ related_workshop.short_description|truncatewords:15 }}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="text-primary fw-bold">${{ related_workshop.price }}</span>
+                                    <a href="{% url 'healing:workshop_detail' related_workshop.id %}" class="btn btn-outline-primary btn-sm">Learn More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Call to Action Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="h1 mb-4">Ready to Begin Your Healing Journey?</h2>
+                <p class="lead mb-4">
+                    Join our workshops and discover the transformative power of Pranic Healing.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="{% url 'healing:workshops' %}" class="btn btn-light btn-lg">View All Workshops</a>
+                    <a href="{% url 'healing:contact' %}" class="btn btn-outline-light btn-lg">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
