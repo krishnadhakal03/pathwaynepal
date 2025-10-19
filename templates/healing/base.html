@@ -56,7 +56,6 @@
     <!-- Analytics -->
     {% if analytics and analytics.is_active %}
         {% if analytics.gtag_id %}
-            <!-- Google Analytics 4 -->
             <script async src="https://www.googletagmanager.com/gtag/js?id={{ analytics.gtag_id }}"></script>
             <script>
                 window.dataLayer = window.dataLayer || [];
@@ -93,10 +92,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'healing:home' %}">Home</a>
                         </li>
-
+                        
                         <!-- About Us Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'healing:about' %}" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{% url 'healing:about' %}" id="aboutDropdown" role="button" data-bs-toggle="dropdown">
                                 About Us
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
@@ -108,7 +107,7 @@
 
                         <!-- Workshops Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="{% url 'healing:workshops' %}" id="workshopsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="{% url 'healing:workshops' %}" id="workshopsDropdown" role="button" data-bs-toggle="dropdown">
                                 Workshops
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="workshopsDropdown">
@@ -224,26 +223,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/pranic-healing.js' %}"></script>
 
-    <!-- Mobile Dropdown Fix -->
+    <!-- Mobile Fix for About Us / Workshops -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            var dropdownToggles = document.querySelectorAll('.navbar .dropdown-toggle');
-            dropdownToggles.forEach(function(toggle) {
-                toggle.addEventListener('click', function(e) {
-                    var windowWidth = window.innerWidth;
-                    if (windowWidth < 992) { // mobile
-                        if (!this.classList.contains('show')) {
-                            e.preventDefault(); // open dropdown first
-                        }
-                    }
-                });
-            });
+            if (window.innerWidth < 992) { // Mobile
+                var aboutLink = document.getElementById('aboutDropdown');
+                var workshopsLink = document.getElementById('workshopsDropdown');
+
+                if (aboutLink) {
+                    aboutLink.removeAttribute('data-bs-toggle');
+                    aboutLink.addEventListener('click', function() {
+                        window.location.href = "{% url 'healing:about' %}";
+                    });
+                }
+                if (workshopsLink) {
+                    workshopsLink.removeAttribute('data-bs-toggle');
+                    workshopsLink.addEventListener('click', function() {
+                        window.location.href = "{% url 'healing:workshops' %}";
+                    });
+                }
+            }
         });
     </script>
     
     {% block extra_js %}{% endblock %}
     
-    <!-- Analytics Body Code -->
     {% if analytics and analytics.is_active and analytics.custom_body_code %}
         {{ analytics.custom_body_code|safe }}
     {% endif %}
