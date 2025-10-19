@@ -70,6 +70,15 @@
             {{ analytics.custom_tracking_code|safe }}
         {% endif %}
     {% endif %}
+
+    <style>
+        /* Desktop dropdown hover */
+        @media (min-width: 992px) {
+            .navbar .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -93,26 +102,31 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'healing:home' %}">Home</a>
                         </li>
+
+                        <!-- About Us Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 About Us
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
                                 <li><a class="dropdown-item" href="{% url 'healing:about' %}">About Us</a></li>
                                 <li><a class="dropdown-item" href="{% url 'healing:healers' %}">Our Healers</a></li>
                                 <li><a class="dropdown-item" href="{% url 'healing:testimonials' %}">Testimonials</a></li>
                             </ul>
                         </li>
+
+                        <!-- Workshops Dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="workshopsDropdown" role="button" data-bs-toggle="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="workshopsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Workshops
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" aria-labelledby="workshopsDropdown">
                                 <li><a class="dropdown-item" href="{% url 'healing:workshops' %}">All Workshops</a></li>
                                 <li><a class="dropdown-item" href="{% url 'healing:meditation' %}">Meditation</a></li>
                                 <li><a class="dropdown-item" href="{% url 'healing:events' %}">Events</a></li>
                             </ul>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'healing:book_healing_session' %}">Book A Session</a>
                         </li>
