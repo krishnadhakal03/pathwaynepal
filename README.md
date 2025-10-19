@@ -1,6 +1,6 @@
-# Pranic Healing USA Website
+# Pranic Pathway Nepal
 
-A Django-based website for Pranic Healing USA, featuring energy healing services, workshops, and spiritual wellness content.
+A Django-based website for Pranic Pathway Nepal, featuring energy healing services, workshops, and spiritual wellness content.
 
 ## Features
 
